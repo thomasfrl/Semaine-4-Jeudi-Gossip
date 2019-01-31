@@ -14,13 +14,11 @@ Tag.destroy_all
 City.destroy_all
 JoinTableGossipTag.destroy_all
 PrivateMessage.destroy_all
-Recipient.destroy_all
 ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'gosips'")
 ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'users'")
 ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'tags'")
 ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'cities'")
 ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'join_table_gossip_tags'")
-ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'recipients'")
 ActiveRecord::Base.connection.execute("DELETE from sqlite_sequence where name = 'private_messages'")
 
 10.times do 
@@ -47,8 +45,4 @@ end
 
 40.times do
     m = PrivateMessage.create!(content: Faker::ChuckNorris.fact, sender_id: User.all.sample.id, recipient_id: User.all.sample.id)
-end
-
-60.times do
-    r = Recipient.create!(user_id: User.all.sample.id, private_message_id: PrivateMessage.all.sample.id)
 end
