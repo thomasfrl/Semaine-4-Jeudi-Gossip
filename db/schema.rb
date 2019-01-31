@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_31_164950) do
+ActiveRecord::Schema.define(version: 2019_01_31_175805) do
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
@@ -31,11 +31,18 @@ ActiveRecord::Schema.define(version: 2019_01_31_164950) do
     t.index ["tag_id"], name: "index_join_table_gossip_tags_on_tag_id"
   end
 
+  create_table "join_table_rpm", force: :cascade do |t|
+    t.integer "received_message_id"
+    t.integer "recipient_id"
+    t.index ["received_message_id"], name: "index_join_table_rpm_on_received_message_id"
+    t.index ["recipient_id"], name: "index_join_table_rpm_on_recipient_id"
+  end
+
   create_table "private_messages", force: :cascade do |t|
     t.text "content"
-    t.integer "recipient_id"
+    t.integer "join_table_recipient_pm_id"
     t.integer "sender_id"
-    t.index ["recipient_id"], name: "index_private_messages_on_recipient_id"
+    t.index ["join_table_recipient_pm_id"], name: "index_private_messages_on_join_table_recipient_pm_id"
     t.index ["sender_id"], name: "index_private_messages_on_sender_id"
   end
 
